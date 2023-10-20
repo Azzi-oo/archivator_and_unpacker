@@ -1,4 +1,5 @@
 def archiver(text: str) -> str:
+    # Проверка на пустую строку
     if not text:
         return ''
     compressed_text = ''
@@ -22,26 +23,18 @@ def archiver(text: str) -> str:
 
 
 def unpacker(text: str) -> str:
+    # Если не пуста строка, то вернуть пустую строку
     if not text:
         return ''
-    # Создаем пустую строку и инициализируем пер-ую sim
+    # Создаю пустую строку для распакованного текста
     empty_text = ''
-    sim = 0
-    # Пока не достигнет входной строки
-    while sim < len(text):
-        # Получаем текущий символ
-        char = text[sim]
-        # Увеличиваем индекс, чтобы перейти к другому символу
-        sim += 1
-        # Инициализируем перем-ую для хранения повторяющихся символов
-        replay = ''
-        # следующий текст является цифрой для кол-ва повторений
-        while sim < len(text) and text[sim].isdigit():
-            # Добавляем цифры
-            replay += text[sim]
-            # Переходим к след. символу
-            sim += 1
-        if replay:
-            empty_text += char * int(replay)
-        # Добавляем повторяющиеся символы в строку
+    # В цикле перебираю по 2 символа
+    for i in range(0, len(text), 2):
+        # Получаю текущий символ
+        symbol = text[i]
+        # Получаю кол-во повторений
+        replay = text[i + 1]
+        # Добавляю букву, в распакованный текст
+        empty_text += symbol * int(replay)
+    # Возвращаю пустой текст
     return empty_text
